@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honoring the Holy Banana</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #ffd700 0%, #1a1a1a 100%); /* Divine gradient background */
+            color: #fff; /* Divine text color */
+            font-family: 'Georgia', serif; /* Divine font */
+        }
+        #bananaContainer {
+            position: relative;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #bananaImage {
+            width: 70%; /* Make the image smaller */
+            height: auto;
+            max-width: 100%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); /* Divine shadow effect */
+            animation: holyEffect 2s infinite alternate;
+        }
+        @keyframes holyEffect {
+            from {
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+            }
+            to {
+                filter: drop-shadow(0 0 80px rgba(255, 223, 0, 1)); /* Enhanced "HOLYEST" effect with gold glow */
+            }
+        }
+        #textOverlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 2em;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); /* Divine text shadow */
+        }
+    </style>
+</head>
+<body>
+    <div id="bananaContainer">
+        <img id="bananaImage" src="image.png" alt="Holy Banana PNG">
+        <div id="textOverlay">
+            <p id="honoringCount">0 second honored</p>
+            <p id="honorRank">Junior Honorer</p>
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+        let rankCounter = 0;
+        const maxRanks = 200;
+        const highestRank = maxRanks - 1;
+        const rankLevels = [
+            "Junior", "Super Junior", "Max Junior", "Junior Super", "Super", "Mega", "Ultra", "Super Mega", "Max Super Mega",
+            "Divine", "Celestial", "Ethereal", "Supreme", "Transcendent", "Eternal", "Infinite", "Cosmic", "Universal",
+            "Supernatural", "Mythical", "Legendary", "Epic", "Godly", "Deific", "Celestial Divine", "Eternal Celestial Divine",
+            "Supreme Celestial Divine", "Transcendent Celestial Divine", "Eternal Supreme Celestial Divine",
+            "Infinite Transcendent Celestial Divine", "Cosmic Infinite Transcendent Celestial Divine",
+            "Eternal Cosmic Infinite Transcendent Celestial Divine", "Epic Eternal Cosmic Infinite Transcendent Celestial Divine",
+            "Godlyest Honorer"
+        ];
+
+        function generateRankName(rankNumber) {
+            const levelIndex = rankNumber % rankLevels.length;
+            return `${rankLevels[levelIndex]} Honorer`;
+        }
+
+        function honorBanana() {
+            count++;
+            document.getElementById('honoringCount').innerText = `${count} second${count !== 1 ? 's' : ''} honored`;
+
+            // Change rank every 5 seconds, up to the maximum rank
+            if (count % 5 === 0 && rankCounter < highestRank) {
+                rankCounter++;
+                document.getElementById('honorRank').innerText = generateRankName(rankCounter);
+            } else if (rankCounter === highestRank) {
+                // If the highest rank is reached, apply special effect to the image
+                document.getElementById('bananaImage').style.filter = 'drop-shadow(0 0 80px rgba(255, 223, 0, 1))';
+            }
+        }
+
+        // Update every second
+        setInterval(honorBanana, 1000);
+    </script>
+</body>
+</html>
